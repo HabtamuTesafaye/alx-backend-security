@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ip_tracking',
+    'django_ratelimit',    'tailwind',
+    'theme',  # your Tailwind theme
+    'django_browser_reload',  # optional for live reload
 ]
 
 MIDDLEWARE = [
@@ -48,18 +51,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'ip_tracking.middleware.IPLoggingMiddleware',
+    'ip_tracking.middleware.IPTrackingMiddleware'
 ]
 
 ROOT_URLCONF = 'alx_backend_security.urls'
 
+
+# Update your TEMPLATES setting to include request context
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -67,6 +73,16 @@ TEMPLATES = [
         },
     },
 ]
+# Update your STATICFILES_DIRS to ensure Tailwind works properly
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR / "theme/static",
+]
+
+# Add this for better admin UI experience
+ADMIN_SITE_HEADER = "ALX Security Dashboard"
+ADMIN_SITE_TITLE = "ALX Security Administration"
+ADMIN_INDEX_TITLE = "Security Monitoring"
 
 WSGI_APPLICATION = 'alx_backend_security.wsgi.application'
 
@@ -122,3 +138,20 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+TAILWIND_APP_NAME = 'theme'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # DB 1 for cache
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# settings.py
+SAFE_ADMIN_IPS = ['127.0.0.1', 'YOUR_PUBLIC_IP_HERE']

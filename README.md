@@ -6,7 +6,9 @@
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](#)
 
-### 🎯 Project Overview
+---
+
+## 🎯 Project Overview
 
 This project demonstrates how to implement **IP tracking in Django** to improve security, monitor user activity, and enable analytics while respecting privacy and compliance requirements.
 
@@ -17,34 +19,19 @@ It includes:
 * IP **geolocation** enrichment
 * **Rate limiting** to prevent abuse
 * **Anomaly detection** with Celery tasks
+* **Dark mode dashboard** with Tailwind CSS and Heroicons
 
 ---
 
-Everything else from the previous README stays the same.
+## 🖼️ Screenshots
+
+### Light Mode
+![Dashboard Light Mode](docs/screenshots/light.png)
+
+### Dark Mode
+![Dashboard Dark Mode](docs/screenshots/dark.png)
 
 ---
-
-💡 **Notes on badges:**
-
-* `Build Status` and `Coverage` are placeholders — you can link them to your CI/CD system (GitHub Actions, TravisCI, etc.) once you set it up.
-* Python and Django badges are static and indicate your project’s versions.
-* License badge links to your LICENSE file.
-
----
-### 🎯 Project Overview
-
-This project demonstrates how to implement **IP tracking in Django** to improve security, monitor user activity, and enable analytics while respecting privacy and compliance requirements.
-
-It includes:
-
-* IP **logging** with middleware
-* IP **blacklisting** with management commands
-* IP **geolocation** enrichment
-* **Rate limiting** to prevent abuse
-* **Anomaly detection** with Celery tasks
-
----
-
 
 ## 📚 Learning Objectives
 
@@ -55,6 +42,7 @@ By completing this project, you will be able to:
 * Integrate geolocation APIs to add contextual data (country, city).
 * Enforce request rate limits for security and fairness.
 * Detect abnormal traffic patterns using log analysis and basic ML.
+* Implement a **responsive, dark-mode-friendly dashboard** using Tailwind CSS.
 * Apply GDPR/CCPA best practices for compliance.
 
 ---
@@ -66,7 +54,7 @@ By completing this project, you will be able to:
 ```bash
 git clone https://github.com/<your-username>/alx-backend-security.git
 cd alx-backend-security
-```
+````
 
 ### 2. Create Virtual Environment
 
@@ -108,9 +96,9 @@ python manage.py runserver
 * Block specific IPs using the `BlockedIP` model.
 * Add IPs with:
 
-  ```bash
-  python manage.py block_ip <ip_address>
-  ```
+```bash
+python manage.py block_ip <ip_address>
+```
 
 ### 🔹 Task 2: IP Geolocation Analytics
 
@@ -133,6 +121,12 @@ python manage.py runserver
   * Flags IPs accessing sensitive paths (`/admin`, `/login`)
 * Stores flagged IPs in `SuspiciousIP` model.
 
+### 🔹 Task 5: Dark Mode Dashboard
+
+* Responsive dashboard built with **Tailwind CSS**.
+* Supports **light and dark mode** based on user preference or system theme.
+* Includes **charts, cards, and status badges** for IP analytics.
+
 ---
 
 ## 🔑 Tools & Libraries
@@ -145,6 +139,8 @@ python manage.py runserver
 * **Celery** – scheduled background tasks
 * **scikit-learn** – anomaly detection support
 * **GeoIP2 / ipinfo.io** – geolocation data
+* **Tailwind CSS** – modern styling with dark mode support
+* **Heroicons** – dashboard icons
 
 ---
 
@@ -185,10 +181,5 @@ Run tests:
 ```bash
 python manage.py test ip_tracking
 ```
-
-
-
-
-
 
 
